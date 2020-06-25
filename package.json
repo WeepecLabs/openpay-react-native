@@ -1,6 +1,6 @@
 {
   "name": "openpay-react-native",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Generates the device_session_id and tokenize the credit cards with Openpay.",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,7 @@
     "react-native-component",
     "credit-card"
   ],
-  "author": "Federico Balderas <federico.balderas@openpay.mx>",
+  "author": "Federico Balderas <federico.balderas@openpay.mx>, Enrique Aguilar <eaguilar@weepec.com>",
   "license": "MIT",
   "dependencies": {
     "buffer": "^5.2.0",

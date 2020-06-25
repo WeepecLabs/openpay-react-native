@@ -132,14 +132,14 @@ export default class Openpay extends Component {
 
   tokenize = async () => {
     console.log('******** tokenize ******');
+    this.setState(() => ({ loading: true }));
     const cardForm = this.state.form;
 
     if (!cardForm.valid) {
       this.props.failToken(cardForm.status);
+      this.setState(() => ({ loading: false }));
       return;
     }
-
-    this.setState(() => ({ loading: true }));
 
     const card = cardForm.values;
     const expirationDate = card.expiry.split('/');
@@ -205,7 +205,7 @@ export default class Openpay extends Component {
 
 const styles = StyleSheet.create({
   inputStyle: {
-    fontSize: 18
+    fontSize: 14
   },
   container: {
     justifyContent: 'center',
@@ -216,8 +216,8 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 45,
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
+    backgroundColor: '#00a6ce',
+    borderColor: '#00a6ce',
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 5,
