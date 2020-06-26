@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WeepecLabs/openpay-react-native.git"
+    "url": "git+https://github.com/open-pay/openpay-react-native.git"
   },
   "bugs": {
-    "url": "https://github.com/WeepecLabs/openpay-react-native/issues"
+    "url": "https://github.com/open-pay/openpay-react-native/issues"
   },
   "homepage": "http://openpay.mx/",
   "keywords": [
