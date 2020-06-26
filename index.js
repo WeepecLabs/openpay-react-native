@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { View, WebView, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, WebView, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { CreditCardInput } from 'react-native-credit-card-input-fullpage';
 import uuidv4 from 'uuid/v4';
 import DeviceInfo from 'react-native-device-info';
@@ -131,13 +130,16 @@ export default class Openpay extends Component {
   }
 
   tokenize = async () => {
+    this.props.onStart(true);
     console.log('******** tokenize ******');
     this.setState(() => ({ loading: true }));
     const cardForm = this.state.form;
 
     if (!cardForm.valid) {
       this.props.failToken(cardForm.status);
+      this.props.onStart(true);
       this.setState(() => ({ loading: false }));
+      this.props.onStart(false);
       return;
     }
 
@@ -158,6 +160,7 @@ export default class Openpay extends Component {
     } catch (error) {
       this.props.failToken(error);
       this.setState(() => ({ loading: false }));
+      this.props.onStart(false);
     }
   }
 
@@ -180,18 +183,23 @@ export default class Openpay extends Component {
       number: '1234 5678 1234 5678',
     };
 
-    const { uri, injectedJavaScript, loading } = this.state;
+    const { uri, injectedJavaScript, loading, form } = this.state;
+    
+    const Button = ({ loading, onPress }) => (
+      <TouchableOpacity
+        onPress={onPress}
+        style={styles.button}
+        disabled={loading || !form.valid}
+        // style={{ opacity: loading || !form.valid ? 0.5 : 1}}
+      >
+        <Text style={styles.text}> {this.props.buttonText ? this.props.buttonText : 'Pay Now'}</Text>
+      </TouchableOpacity>
+    )
 
     return (
       <View style={{ flex: 1 }} >
         <CreditCardInput onChange={this.handleCreditCardInputs} requiresName={true} labels={labels} placeholders={placeholders} inputStyle={styles.inputStyle} />
-        <Button
-          onPress={this.tokenize}
-          buttonStyle={styles.button}
-          title={this.props.buttonText ? this.props.buttonText : 'Pay Now'}
-          loading={this.props.load}
-          disabled={this.props.load}
-        />
+        <Button loading={loading} onPress={this.tokenize}/>
         <View style={{ height: 10, width: 10, overflow: 'hidden' }}>
           <WebView
             source={{ uri: uri }}
@@ -217,14 +225,11 @@ const styles = StyleSheet.create({
   button: {
     height: 45,
     backgroundColor: '#00a6ce',
-    borderColor: '#00a6ce',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 5,
     justifyContent: 'center',
-    marginTop: 30,
-    padding: 5
-  }
+    borderRadius: 8,
+    marginTop: 25,
+  },
+  text: { color: "white", textAlign: "center"}
 });
 
 const isFunction = (value) => {
