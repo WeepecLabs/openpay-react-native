@@ -188,7 +188,7 @@ export default class Openpay extends Component {
     const Button = ({ loading, onPress }) => (
       <TouchableOpacity
         onPress={onPress}
-        style={[{ opacity: loading || !form.valid ? 0.8 : 1 }, styles.button]}
+        style={[{ opacity: loading || !form.valid ? 0.4 : 1 }, styles.button]}
         disabled={loading || !form.valid}
       >
         <Text style={styles.text}> {this.props.buttonText ? this.props.buttonText : 'Pay Now'}</Text>
