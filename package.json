@@ -29,7 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "buffer": "^5.2.0",
-    "react-native-credit-card-input-fullpage": "^0.2.0",
+    "react-native-credit-card-input-fullpage": "WeepecLabs/react-native-credit-card-input-fullpage#master",
     "react-native-device-info": "^0.22.2",
     "react-native-elements": "^0.19.1",
     "sprintf-js": "^1.1.1",
